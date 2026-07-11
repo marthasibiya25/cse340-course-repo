@@ -1,0 +1,55 @@
+```ejs
+<%- include("partials/header", { title: title }) %>
+
+    <main class="container">
+
+        <section class="hero">
+            <h1>
+                <%= title %>
+            </h1>
+
+            <p>
+                Welcome to Service Network, a platform that connects
+                volunteers, organizations, and community projects.
+            </p>
+
+            <p>
+                Discover opportunities to serve, collaborate, and create
+                a positive impact in your community.
+            </p>
+        </section>
+
+        <section class="featured">
+            <h2>What We Offer</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Organizations</h3>
+                    <p>
+                        Explore organizations making a difference through
+                        meaningful service work.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Projects</h3>
+                    <p>
+                        Find service projects where you can contribute
+                        your time and skills.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Categories</h3>
+                    <p>
+                        Browse projects by areas such as environment,
+                        education, community service, and wellness.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <%- include("partials/footer") %>
+        ```
