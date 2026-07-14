@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 
+const categoriesModel = require("./models/categories");
+
 dotenv.config();
 
 const app = express();
@@ -41,10 +43,15 @@ app.get("/projects", (req, res) => {
 
 
 // Categories
-app.get("/categories", (req, res) => {
+app.get("/categories", async (req, res) => {
+
+    const categories = await categoriesModel.getCategories();
+
     res.render("categories", {
-        title: "Service Project Categories"
+        title: "Service Project Categories",
+        categories
     });
+
 });
 
 
