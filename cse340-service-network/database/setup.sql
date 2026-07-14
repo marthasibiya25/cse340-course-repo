@@ -1,23 +1,34 @@
-CREATE TABLE category (
-    category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR(50) NOT NULL
+CREATE TABLE organization (
+    organization_id SERIAL PRIMARY KEY,
+    organization_name VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE project (
+    project_id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255) NOT NULL,
+    organization_id INT REFERENCES organization(organization_id)
+);
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL
+);
 
 CREATE TABLE project_category (
-    project_id INT REFERENCES project(project_id) ON DELETE CASCADE,
-    category_id INT REFERENCES category(category_id) ON DELETE CASCADE,
+    project_id INT REFERENCES project(project_id),
+    category_id INT REFERENCES category(category_id),
     PRIMARY KEY (project_id, category_id)
 );
 
 INSERT INTO category (category_name)
 VALUES
-('Environment'),
 ('Education'),
+('Environment'),
 ('Community Support');
 
 INSERT INTO project_category (project_id, category_id)
 VALUES
 (1,1),
-(2,2),
-(3,3);
+(1,2),
+(2,3);
+
