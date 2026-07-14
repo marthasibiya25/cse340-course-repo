@@ -8,7 +8,6 @@ async function getCategories() {
     return result.rows;
 }
 
-module.exports = {
+export default {
     getCategories
 };
-

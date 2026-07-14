@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 
-const categoriesModel = require("./models/categories");
+import categoriesModel from "./models/categories.js";
 
 dotenv.config();
 
