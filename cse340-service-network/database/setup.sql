@@ -26,6 +26,16 @@ VALUES
 ('Environment'),
 ('Community Support');
 
+INSERT INTO organization (organization_name)
+VALUES
+('Helping Hands'),
+('Green Earth Initiative');
+
+INSERT INTO project (project_name, organization_id)
+VALUES
+('Community Teaching Program', 1),
+('Tree Planting Project', 2);
+
 INSERT INTO project_category (project_id, category_id)
 VALUES
 (1,1),
