@@ -1,4 +1,4 @@
-const pool = require("../database/");
+import pool from "../database/index.js";
 
 async function getCategories() {
     const result = await pool.query(
