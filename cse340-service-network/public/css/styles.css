@@ -102,3 +102,8 @@ img {
     display: block;
     margin: 0 auto;
 }
+
+.organization-logo {
+    width: 50px !important;
+    height: 50px !important;
+}
