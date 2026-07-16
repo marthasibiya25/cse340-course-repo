@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 
+import organizationsModel from "./models/organizations.js";
+import projectsModel from "./models/projects.js";
 import categoriesModel from "./models/categories.js";
 
 dotenv.config();
@@ -27,18 +29,28 @@ app.get("/", (req, res) => {
 
 
 // Organizations
-app.get("/organizations", (req, res) => {
+app.get("/organizations", async (req, res) => {
+
+    const organizations = await organizationsModel.getOrganizations();
+
     res.render("organizations", {
-        title: "Organizations"
+        title: "Organizations",
+        organizations
     });
+
 });
 
 
 // Projects
-app.get("/projects", (req, res) => {
+app.get("/projects", async (req, res) => {
+
+    const projects = await projectsModel.getProjects();
+
     res.render("projects", {
-        title: "Service Projects"
+        title: "Service Projects",
+        projects
     });
+
 });
 
 
