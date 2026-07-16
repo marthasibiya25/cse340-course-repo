@@ -9,32 +9,45 @@
 
         <section class="projects">
 
-            <div class="card">
-                <h2>Community Garden Project</h2>
-                <p>
-                    Volunteers work together to create sustainable
-                    community gardens.
-                </p>
-            </div>
+            <% projects.forEach(project=> { %>
 
-            <div class="card">
-                <h2>School Supply Drive</h2>
-                <p>
-                    A project that provides learning materials to
-                    students in need.
-                </p>
-            </div>
+                <div class="card">
 
-            <div class="card">
-                <h2>Health Awareness Campaign</h2>
-                <p>
-                    Promoting healthy living and wellness education.
-                </p>
-            </div>
+                    <h2>
+                        <%= project.project_name %>
+                    </h2>
+
+                    <p>
+                        <%= project.description %>
+                    </p>
+
+                    <p>
+                        Location:
+                        <%= project.location %>
+                    </p>
+
+                    <p>
+                        Date:
+                        <%= project.date.toISOString().split("T")[0] %>
+                    </p>
+
+                    <p>
+                        Category:
+                        <%= project.category_name %>
+                    </p>
+
+                    <p>
+                        Organization:
+                        <%= project.organization_name %>
+                    </p>
+
+                </div>
+
+                <% }) %>
 
         </section>
 
     </main>
 
     <%- include("partials/footer") %>
-        ```
+    ```

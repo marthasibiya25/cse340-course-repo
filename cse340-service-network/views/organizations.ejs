@@ -8,32 +8,34 @@
         </h1>
 
         <section class="organizations">
+
             <img src="/images/organization.jpg" alt="Community organization" class="hero-image">
-            <div class="card">
-                <h2>Green Earth Foundation</h2>
-                <p>
-                    An organization focused on environmental protection
-                    and sustainability projects.
-                </p>
-            </div>
 
-            <div class="card">
-                <h2>Community Learning Center</h2>
-                <p>
-                    Supporting education and skills development through
-                    community programs.
-                </p>
-            </div>
+            <% organizations.forEach(org=> { %>
 
-            <div class="card">
-                <h2>Health Support Network</h2>
-                <p>
-                    Helping communities improve health and wellness.
-                </p>
-            </div>
+                <div class="card">
+
+                    <img src="<%= org.logo %>" alt="<%= org.organization_name %> logo">
+
+                    <h2>
+                        <%= org.organization_name %>
+                    </h2>
+
+                    <p>
+                        <%= org.description %>
+                    </p>
+
+                    <p>
+                        Email:
+                        <%= org.contact_email %>
+                    </p>
+
+                </div>
+
+                <% }) %>
+
         </section>
 
     </main>
 
     <%- include("partials/footer") %>
-        ```
