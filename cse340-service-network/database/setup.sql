@@ -1,44 +1,75 @@
-CREATE TABLE organization (
-    organization_id SERIAL PRIMARY KEY,
-    organization_name VARCHAR(255) NOT NULL
-);
+DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS organizations;
+DROP TABLE IF EXISTS category;
 
-CREATE TABLE project (
-    project_id SERIAL PRIMARY KEY,
-    project_name VARCHAR(255) NOT NULL,
-    organization_id INT REFERENCES organization(organization_id)
-);
 
 CREATE TABLE category (
     category_id SERIAL PRIMARY KEY,
     category_name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE project_category (
-    project_id INT REFERENCES project(project_id),
-    category_id INT REFERENCES category(category_id),
-    PRIMARY KEY (project_id, category_id)
+
+CREATE TABLE organizations (
+    organization_id SERIAL PRIMARY KEY,
+    organization_name VARCHAR(150) NOT NULL,
+    logo VARCHAR(255),
+    contact_email VARCHAR(150),
+    description TEXT
 );
+
+
+CREATE TABLE projects (
+    project_id SERIAL PRIMARY KEY,
+    project_name VARCHAR(150) NOT NULL,
+    description TEXT,
+    location VARCHAR(150),
+    date DATE,
+    category_id INT REFERENCES category(category_id),
+    organization_id INT REFERENCES organizations(organization_id)
+);
+
 
 INSERT INTO category (category_name)
 VALUES
-('Education'),
 ('Environment'),
-('Community Support');
+('Education'),
+('Community Support'),
+('Healthcare');
 
-INSERT INTO organization (organization_name)
+
+INSERT INTO organizations 
+(organization_name, logo, contact_email, description)
 VALUES
-('Helping Hands'),
-('Green Earth Initiative');
+(
+'Green Earth Foundation',
+'/images/green-earth.png',
+'info@greenearth.org',
+'An organization focused on protecting the environment.'
+),
+(
+'Helping Hands Community',
+'/images/helping-hands.png',
+'contact@helpinghands.org',
+'Supporting community members through service projects.'
+);
 
-INSERT INTO project (project_name, organization_id)
+
+INSERT INTO projects
+(project_name, description, location, date, category_id, organization_id)
 VALUES
-('Community Teaching Program', 1),
-('Tree Planting Project', 2);
-
-INSERT INTO project_category (project_id, category_id)
-VALUES
-(1,1),
-(1,2),
-(2,3);
-
+(
+'Tree Planting Initiative',
+'Planting trees to improve the environment.',
+'Johannesburg',
+'2026-07-01',
+1,
+1
+),
+(
+'Community Food Drive',
+'Providing food support to families in need.',
+'Vanderbijlpark',
+'2026-07-10',
+3,
+2
+);
