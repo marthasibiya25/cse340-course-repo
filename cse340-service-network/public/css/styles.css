@@ -94,3 +94,11 @@ img {
     margin: 20px auto;
     border-radius: 10px;
 }
+
+.organization-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
