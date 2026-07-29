@@ -37,18 +37,18 @@ VALUES
 ('Healthcare');
 
 
-INSERT INTO organizations 
+INSERT INTO organizations
 (organization_name, logo, contact_email, description)
 VALUES
 (
 'Green Earth Foundation',
-'/images/green-earth.png',
+'/images/green-earth-logo.png',
 'info@greenearth.org',
 'An organization focused on protecting the environment.'
 ),
 (
 'Helping Hands Community',
-'/images/helping-hands.png',
+'/images/helping-hands-logo.jpg',
 'contact@helpinghands.org',
 'Supporting community members through service projects.'
 );
