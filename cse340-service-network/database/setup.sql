@@ -54,7 +54,7 @@ VALUES
 ),
 (
 'Youth Empowerment Network',
-'/images/youth-empowerment-logo.webp',
+'/images/youth-empowerment-logo.png',
 'info@youthnetwork.org',
 'Helping young people build leadership, technology, and career skills through community outreach and educational programs.'
 );
