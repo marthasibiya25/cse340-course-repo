@@ -1,27 +1,25 @@
 import pool from "../database/index.js";
 
-
-async function getOrganizations() {
+const getAllOrganizations = async () => {
     const result = await pool.query(
         "SELECT * FROM organizations ORDER BY organization_name"
     );
 
     return result.rows;
-}
+};
 
 
-async function getOrganizationById(id) {
+const getOrganizationById = async (id) => {
     const result = await pool.query(
         "SELECT * FROM organizations WHERE organization_id = $1",
         [id]
     );
 
     return result.rows[0];
-}
+};
 
 
 export default {
-    getOrganizations,
+    getAllOrganizations,
     getOrganizationById
 };
-

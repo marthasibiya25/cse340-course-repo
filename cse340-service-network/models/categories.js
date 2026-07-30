@@ -1,6 +1,6 @@
 import pool from "../database/index.js";
 
-async function getCategories() {
+const getAllCategories = async () => {
     try {
         const result = await pool.query(
             "SELECT * FROM category ORDER BY category_name"
@@ -12,8 +12,9 @@ async function getCategories() {
         console.error("Error getting categories:", error);
         return [];
     }
-}
+};
+
 
 export default {
-    getCategories
+    getAllCategories
 };

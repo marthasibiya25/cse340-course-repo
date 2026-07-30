@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 // Organizations
 app.get("/organizations", async (req, res) => {
 
-    const organizations = await organizationsModel.getOrganizations();
+    const organizations = await organizationsModel.getAllOrganizations();
 
     res.render("organizations", {
         title: "Organizations",
@@ -44,7 +44,7 @@ app.get("/organizations", async (req, res) => {
 // Projects
 app.get("/projects", async (req, res) => {
 
-    const projects = await projectsModel.getProjects();
+    const projects = await projectsModel.getAllProjects();
 
     res.render("projects", {
         title: "Service Projects",
@@ -57,7 +57,7 @@ app.get("/projects", async (req, res) => {
 // Categories
 app.get("/categories", async (req, res) => {
 
-    const categories = await categoriesModel.getCategories();
+    const categories = await categoriesModel.getAllCategories();
 
     res.render("categories", {
         title: "Service Project Categories",
