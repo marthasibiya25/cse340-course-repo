@@ -1,0 +1,47 @@
+<%- include("partials/header", { title: title }) %>
+
+    <main class="container">
+
+        <h1>
+            <%= organization.organization_name %>
+        </h1>
+
+
+        <img src="<%= organization.logo %>" alt="<%= organization.organization_name %> logo" class="organization-logo">
+
+
+        <p>
+            <%= organization.description %>
+        </p>
+
+
+        <p>
+            Email:
+            <%= organization.contact_email %>
+        </p>
+
+
+        <h2>
+            Service Projects
+        </h2>
+
+
+        <ul>
+
+            <% projects.forEach(project=> { %>
+
+                <li>
+                    <a href="/project/<%= project.project_id %>">
+                        <%= project.project_name %>
+                    </a>
+                </li>
+
+                <% }) %>
+
+        </ul>
+
+
+    </main>
+
+
+    <%- include("partials/footer") %>

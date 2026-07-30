@@ -1,6 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 
+import categoryRoutes from "./routes/categoryRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import organizationRoutes from "./routes/organizationRoutes.js";
 import organizationsModel from "./models/organizations.js";
 import projectsModel from "./models/projects.js";
 import categoriesModel from "./models/categories.js";
@@ -68,6 +71,9 @@ app.get("/categories", async (req, res) => {
 
 
 // Start server
+app.use("/", organizationRoutes);
+app.use("/", projectRoutes);
+app.use("/", categoryRoutes);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });

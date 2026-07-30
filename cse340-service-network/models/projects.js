@@ -21,7 +21,7 @@ const getAllProjects = async () => {
         LEFT JOIN category
         ON project_category.category_id = category.category_id
 
-        GROUP BY 
+        GROUP BY
             projects.project_id,
             organizations.organization_name
 
@@ -30,6 +30,7 @@ const getAllProjects = async () => {
     );
 
     return result.rows;
+
 };
 
 
@@ -63,10 +64,37 @@ const getProjectById = async (id) => {
     );
 
     return result.rows[0];
+
+};
+
+
+const getCategoriesByProjectId = async (id) => {
+
+    const result = await pool.query(
+        `
+        SELECT
+            category.category_id,
+            category.category_name
+
+        FROM category
+
+        JOIN project_category
+        ON category.category_id = project_category.category_id
+
+        WHERE project_category.project_id = $1
+
+        ORDER BY category.category_name
+        `,
+        [id]
+    );
+
+    return result.rows;
+
 };
 
 
 export default {
     getAllProjects,
-    getProjectById
+    getProjectById,
+    getCategoriesByProjectId
 };
