@@ -51,6 +51,12 @@ VALUES
 '/images/helping-hands-logo.jpg',
 'contact@helpinghands.org',
 'Supporting community members through service projects.'
+),
+(
+'Youth Empowerment Network',
+'/images/youth-empowerment-logo.webp',
+'info@youthnetwork.org',
+'Helping young people build leadership, technology, and career skills through community outreach and educational programs.'
 );
 
 
@@ -72,4 +78,12 @@ VALUES
 '2026-07-10',
 3,
 2
+),
+(
+'Youth Skills Workshop',
+'Providing digital literacy and career readiness workshops for young people.',
+'Soweto',
+'2026-07-20',
+2,
+3
 );
