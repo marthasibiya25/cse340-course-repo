@@ -63,9 +63,24 @@ const getProjectsByCategoryId = async (id) => {
 
 };
 
+const createCategory = async (category_name) => {
+
+    const result = await pool.query(
+        `
+        INSERT INTO category (category_name)
+        VALUES ($1)
+        RETURNING *
+        `,
+        [category_name]
+    );
+
+    return result.rows[0];
+
+};
 
 export default {
     getAllCategories,
     getCategoryById,
-    getProjectsByCategoryId
+    getProjectsByCategoryId,
+    createCategory
 };
