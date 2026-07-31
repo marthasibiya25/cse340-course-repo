@@ -1,6 +1,7 @@
 import pool from "../database/index.js";
 
 
+// Get all categories
 const getAllCategories = async () => {
 
     const result = await pool.query(
@@ -16,6 +17,7 @@ const getAllCategories = async () => {
 };
 
 
+// Get one category by ID
 const getCategoryById = async (id) => {
 
     const result = await pool.query(
@@ -32,6 +34,7 @@ const getCategoryById = async (id) => {
 };
 
 
+// Get all projects for a category
 const getProjectsByCategoryId = async (id) => {
 
     const result = await pool.query(
@@ -63,6 +66,8 @@ const getProjectsByCategoryId = async (id) => {
 
 };
 
+
+// Create a new category
 const createCategory = async (category_name) => {
 
     const result = await pool.query(
@@ -78,9 +83,32 @@ const createCategory = async (category_name) => {
 
 };
 
+
+// Update an existing category
+const updateCategory = async (id, category_name) => {
+
+    const result = await pool.query(
+        `
+        UPDATE category
+        SET category_name = $1
+        WHERE category_id = $2
+        RETURNING *
+        `,
+        [
+            category_name,
+            id
+        ]
+    );
+
+    return result.rows[0];
+
+};
+
+
 export default {
     getAllCategories,
     getCategoryById,
     getProjectsByCategoryId,
-    createCategory
+    createCategory,
+    updateCategory
 };
