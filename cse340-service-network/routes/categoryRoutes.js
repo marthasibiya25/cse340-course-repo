@@ -4,7 +4,7 @@ import categoryController from "../controllers/categoryController.js";
 const router = express.Router();
 
 
-// Category detail page
+// Category details page
 router.get(
     "/category/:id",
     categoryController.buildCategoryDetail
@@ -18,10 +18,24 @@ router.get(
 );
 
 
-// Process create category form
+// Create category submission
 router.post(
     "/new-category",
     categoryController.createCategory
+);
+
+
+// Edit category page
+router.get(
+    "/edit-category/:id",
+    categoryController.buildEditCategory
+);
+
+
+// Edit category submission
+router.post(
+    "/edit-category/:id",
+    categoryController.updateCategory
 );
 
 
