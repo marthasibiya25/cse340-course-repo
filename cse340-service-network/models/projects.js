@@ -1,6 +1,7 @@
 import pool from "../database/index.js";
 
 
+// Get all projects
 const getAllProjects = async () => {
 
     const result = await pool.query(
@@ -34,6 +35,8 @@ const getAllProjects = async () => {
 };
 
 
+
+// Get one project by ID
 const getProjectById = async (id) => {
 
     const result = await pool.query(
@@ -68,13 +71,14 @@ const getProjectById = async (id) => {
 };
 
 
+
+// Get all categories assigned to a project
 const getCategoriesByProjectId = async (id) => {
 
     const result = await pool.query(
         `
         SELECT
-            category.category_id,
-            category.category_name
+            category.*
 
         FROM category
 
@@ -93,8 +97,72 @@ const getCategoriesByProjectId = async (id) => {
 };
 
 
+
+// Get all categories
+const getAllCategories = async () => {
+
+    const result = await pool.query(
+        `
+        SELECT *
+        FROM category
+        ORDER BY category_name
+        `
+    );
+
+    return result.rows;
+
+};
+
+
+
+// Update categories assigned to a project
+const updateProjectCategories = async (project_id, category_ids) => {
+
+
+    // Remove existing category assignments
+    await pool.query(
+        `
+        DELETE FROM project_category
+        WHERE project_id = $1
+        `,
+        [project_id]
+    );
+
+
+
+    // Add new category assignments
+    for (const category_id of category_ids) {
+
+        await pool.query(
+            `
+            INSERT INTO project_category
+            (
+                project_id,
+                category_id
+            )
+
+            VALUES
+            (
+                $1,
+                $2
+            )
+            `,
+            [
+                project_id,
+                category_id
+            ]
+        );
+
+    }
+
+};
+
+
+
 export default {
     getAllProjects,
     getProjectById,
-    getCategoriesByProjectId
+    getCategoriesByProjectId,
+    getAllCategories,
+    updateProjectCategories
 };
