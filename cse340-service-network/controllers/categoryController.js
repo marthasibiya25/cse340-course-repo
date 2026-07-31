@@ -1,6 +1,7 @@
 import categoriesModel from "../models/categories.js";
 
 
+// Category detail page
 const buildCategoryDetail = async (req, res) => {
 
     const id = req.params.id;
@@ -19,6 +20,54 @@ const buildCategoryDetail = async (req, res) => {
 };
 
 
+// Show create category form
+const buildNewCategory = async (req, res) => {
+
+    res.render("new-category", {
+        title: "Create New Category",
+        error: null
+    });
+
+};
+
+
+// Process create category form
+const createCategory = async (req, res) => {
+
+    const { category_name } = req.body;
+
+
+    // Server-side validation
+    if (
+        !category_name ||
+        category_name.length < 3 ||
+        category_name.length > 100
+    ) {
+
+        return res.render("new-category", {
+            title: "Create New Category",
+            error: "Category name must be between 3 and 100 characters."
+        });
+
+    }
+
+
+    await categoriesModel.createCategory(category_name);
+
+
+    req.flash(
+        "success",
+        "Category created successfully!"
+    );
+
+
+    res.redirect("/categories");
+
+};
+
+
 export default {
-    buildCategoryDetail
+    buildCategoryDetail,
+    buildNewCategory,
+    createCategory
 };

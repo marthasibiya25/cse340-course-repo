@@ -1,0 +1,38 @@
+<%- include("partials/header", { title: title }) %>
+
+    <main class="container">
+
+        <h1>Create New Category</h1>
+
+
+        <% if (error) { %>
+
+            <p class="error">
+                <%= error %>
+            </p>
+
+            <% } %>
+
+
+                <form action="/new-category" method="POST">
+
+
+                    <label for="category_name">
+                        Category Name
+                    </label>
+
+
+                    <input type="text" id="category_name" name="category_name" required maxlength="100">
+
+
+                    <button type="submit">
+                        Create Category
+                    </button>
+
+
+                </form>
+
+
+    </main>
+
+    <%- include("partials/footer") %>
