@@ -1,6 +1,25 @@
 import projectsModel from "../models/projects.js";
 
 
+
+// Display projects list page
+const buildProjects = async (req, res) => {
+
+    const projects = await projectsModel.getAllProjects();
+
+
+    res.render("projects", {
+
+        title: "Service Projects",
+
+        projects
+
+    });
+
+};
+
+
+
 // Display project details page
 const buildProjectDetail = async (req, res) => {
 
@@ -14,9 +33,13 @@ const buildProjectDetail = async (req, res) => {
 
 
     res.render("project-detail", {
+
         title: project.project_name,
+
         project,
+
         categories
+
     });
 
 };
@@ -36,7 +59,6 @@ const buildAssignCategories = async (req, res) => {
 
 
     const projectCategories = await projectsModel.getCategoriesByProjectId(id);
-
 
 
     const assignedCategoryIds = projectCategories.map(
@@ -71,8 +93,6 @@ const updateProjectCategories = async (req, res) => {
     let { category_ids } = req.body;
 
 
-
-    // If only one checkbox is selected
     if (!Array.isArray(category_ids)) {
 
         category_ids = category_ids
@@ -100,7 +120,6 @@ const updateProjectCategories = async (req, res) => {
         res.redirect(`/project/${id}`);
 
 
-
     } catch (error) {
 
         console.error(error);
@@ -121,6 +140,7 @@ const updateProjectCategories = async (req, res) => {
 
 
 export default {
+    buildProjects,
     buildProjectDetail,
     buildAssignCategories,
     updateProjectCategories

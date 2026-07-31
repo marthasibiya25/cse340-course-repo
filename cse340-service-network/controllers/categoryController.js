@@ -1,20 +1,45 @@
 import categoriesModel from "../models/categories.js";
 
 
+
+// Display categories list page
+const buildCategories = async (req, res) => {
+
+    const categories = await categoriesModel.getAllCategories();
+
+
+    res.render("categories", {
+
+        title: "Service Project Categories",
+
+        categories
+
+    });
+
+};
+
+
+
 // Display category details page
 const buildCategoryDetail = async (req, res) => {
 
     const id = req.params.id;
 
+
     const category = await categoriesModel.getCategoryById(id);
+
 
     const projects = await categoriesModel.getProjectsByCategoryId(id);
 
 
     res.render("category-detail", {
+
         title: category.category_name,
+
         category,
+
         projects
+
     });
 
 };
@@ -25,8 +50,11 @@ const buildCategoryDetail = async (req, res) => {
 const buildNewCategory = async (req, res) => {
 
     res.render("new-category", {
+
         title: "Create New Category",
+
         error: null
+
     });
 
 };
@@ -47,8 +75,11 @@ const createCategory = async (req, res) => {
     ) {
 
         return res.render("new-category", {
+
             title: "Create New Category",
+
             error: "Category name must be between 3 and 100 characters."
+
         });
 
     }
@@ -74,8 +105,11 @@ const createCategory = async (req, res) => {
 
 
         res.render("new-category", {
+
             title: "Create New Category",
+
             error: "This category already exists. Please choose another name."
+
         });
 
     }
@@ -94,9 +128,13 @@ const buildEditCategory = async (req, res) => {
 
 
     res.render("edit-category", {
+
         title: "Edit Category",
+
         category,
+
         error: null
+
     });
 
 };
@@ -107,6 +145,7 @@ const buildEditCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
 
     const id = req.params.id;
+
 
     const { category_name } = req.body;
 
@@ -122,9 +161,13 @@ const updateCategory = async (req, res) => {
 
 
         return res.render("edit-category", {
+
             title: "Edit Category",
+
             category,
+
             error: "Category name must be between 3 and 100 characters."
+
         });
 
     }
@@ -156,9 +199,13 @@ const updateCategory = async (req, res) => {
 
 
         res.render("edit-category", {
+
             title: "Edit Category",
+
             category,
+
             error: "This category already exists. Please choose another name."
+
         });
 
     }
@@ -168,9 +215,12 @@ const updateCategory = async (req, res) => {
 
 
 export default {
+
+    buildCategories,
     buildCategoryDetail,
     buildNewCategory,
     createCategory,
     buildEditCategory,
     updateCategory
+
 };

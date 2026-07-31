@@ -4,6 +4,13 @@ import projectController from "../controllers/projectController.js";
 const router = express.Router();
 
 
+// Projects list page
+router.get(
+    "/projects",
+    projectController.buildProjects
+);
+
+
 // Project details page
 router.get(
     "/project/:id",

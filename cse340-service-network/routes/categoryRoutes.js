@@ -4,6 +4,13 @@ import categoryController from "../controllers/categoryController.js";
 const router = express.Router();
 
 
+// Categories list page
+router.get(
+    "/categories",
+    categoryController.buildCategories
+);
+
+
 // Category details page
 router.get(
     "/category/:id",
