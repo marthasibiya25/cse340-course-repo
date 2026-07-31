@@ -1,4 +1,3 @@
-```ejs
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,4 +28,22 @@
             </nav>
         </div>
     </header>
-    ```
+
+
+    <!-- Flash Messages -->
+    <% if (messages.success) { %>
+
+        <div class="flash success">
+            <%= messages.success %>
+        </div>
+
+        <% } %>
+
+
+            <% if (messages.error) { %>
+
+                <div class="flash error">
+                    <%= messages.error %>
+                </div>
+
+                <% } %>
