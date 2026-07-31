@@ -37,7 +37,6 @@ const createCategory = async (req, res) => {
     const { category_name } = req.body;
 
 
-    // Server-side validation
     if (
         !category_name ||
         category_name.length < 3 ||
@@ -52,16 +51,31 @@ const createCategory = async (req, res) => {
     }
 
 
-    await categoriesModel.createCategory(category_name);
+    try {
+
+        await categoriesModel.createCategory(category_name);
 
 
-    req.flash(
-        "success",
-        "Category created successfully!"
-    );
+        req.flash(
+            "success",
+            "Category created successfully!"
+        );
 
 
-    res.redirect("/categories");
+        res.redirect("/categories");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        res.render("new-category", {
+            title: "Create New Category",
+            error: "This category already exists. Please choose another name."
+        });
+
+    }
 
 };
 
