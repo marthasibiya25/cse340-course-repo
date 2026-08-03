@@ -1,4 +1,5 @@
 import categoriesModel from "../models/categories.js";
+import { validationResult } from "express-validator";
 
 
 
@@ -64,25 +65,23 @@ const buildNewCategory = async (req, res) => {
 // Process create category form
 const createCategory = async (req, res) => {
 
-    const { category_name } = req.body;
+    const errors = validationResult(req);
 
 
-    // Server-side validation
-    if (
-        !category_name ||
-        category_name.length < 3 ||
-        category_name.length > 100
-    ) {
+    if (!errors.isEmpty()) {
 
         return res.render("new-category", {
 
             title: "Create New Category",
 
-            error: "Category name must be between 3 and 100 characters."
+            error: errors.array()[0].msg
 
         });
 
     }
+
+
+    const { category_name } = req.body;
 
 
     try {
@@ -147,18 +146,13 @@ const updateCategory = async (req, res) => {
     const id = req.params.id;
 
 
-    const { category_name } = req.body;
+    const errors = validationResult(req);
 
 
-    // Server-side validation
-    if (
-        !category_name ||
-        category_name.length < 3 ||
-        category_name.length > 100
-    ) {
+    const category = await categoriesModel.getCategoryById(id);
 
-        const category = await categoriesModel.getCategoryById(id);
 
+    if (!errors.isEmpty()) {
 
         return res.render("edit-category", {
 
@@ -166,11 +160,14 @@ const updateCategory = async (req, res) => {
 
             category,
 
-            error: "Category name must be between 3 and 100 characters."
+            error: errors.array()[0].msg
 
         });
 
     }
+
+
+    const { category_name } = req.body;
 
 
     try {
@@ -193,9 +190,6 @@ const updateCategory = async (req, res) => {
     } catch (error) {
 
         console.error(error);
-
-
-        const category = await categoriesModel.getCategoryById(id);
 
 
         res.render("edit-category", {

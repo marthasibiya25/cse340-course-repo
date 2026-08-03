@@ -115,6 +115,93 @@ const getAllCategories = async () => {
 
 
 
+// Create project
+const createProject = async (
+    project_name,
+    description,
+    location,
+    date,
+    organization_id
+) => {
+
+    const result = await pool.query(
+        `
+        INSERT INTO projects
+        (
+            project_name,
+            description,
+            location,
+            date,
+            organization_id
+        )
+
+        VALUES
+        (
+            $1,
+            $2,
+            $3,
+            $4,
+            $5
+        )
+
+        RETURNING *
+        `,
+        [
+            project_name,
+            description,
+            location,
+            date,
+            organization_id
+        ]
+    );
+
+    return result.rows[0];
+
+};
+
+
+
+// Update project
+const updateProject = async (
+    id,
+    project_name,
+    description,
+    location,
+    date,
+    organization_id
+) => {
+
+    const result = await pool.query(
+        `
+        UPDATE projects
+
+        SET
+            project_name = $1,
+            description = $2,
+            location = $3,
+            date = $4,
+            organization_id = $5
+
+        WHERE project_id = $6
+
+        RETURNING *
+        `,
+        [
+            project_name,
+            description,
+            location,
+            date,
+            organization_id,
+            id
+        ]
+    );
+
+    return result.rows[0];
+
+};
+
+
+
 // Update categories assigned to a project
 const updateProjectCategories = async (project_id, category_ids) => {
 
@@ -164,5 +251,7 @@ export default {
     getProjectById,
     getCategoriesByProjectId,
     getAllCategories,
-    updateProjectCategories
+    updateProjectCategories,
+    createProject,
+    updateProject
 };

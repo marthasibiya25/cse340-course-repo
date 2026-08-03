@@ -1,0 +1,80 @@
+<%- include("partials/header", { title: title }) %>
+
+    <main class="container">
+
+        <h1>
+            <%= title %>
+        </h1>
+
+
+        <% if (error) { %>
+
+            <p class="error">
+                <%= error %>
+            </p>
+
+            <% } %>
+
+
+                <form action="/new-project" method="POST">
+
+
+                    <label>
+                        Project Name:
+                    </label>
+
+                    <input type="text" name="project_name" required>
+
+
+                    <label>
+                        Description:
+                    </label>
+
+                    <textarea name="description" required></textarea>
+
+
+                    <label>
+                        Location:
+                    </label>
+
+                    <input type="text" name="location" required>
+
+
+                    <label>
+                        Date:
+                    </label>
+
+                    <input type="date" name="date" required>
+
+
+                    <label>
+                        Organization:
+                    </label>
+
+                    <select name="organization_id" required>
+
+                        <% organizations.forEach(org=> { %>
+
+                            <option value="<%= org.organization_id %>">
+
+                                <%= org.organization_name %>
+
+                            </option>
+
+                            <% }) %>
+
+                    </select>
+
+
+                    <button type="submit">
+                        Create Project
+                    </button>
+
+
+                </form>
+
+
+    </main>
+
+
+    <%- include("partials/footer") %>

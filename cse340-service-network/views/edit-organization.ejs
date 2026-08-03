@@ -1,0 +1,60 @@
+<%- include("partials/header", { title: title }) %>
+
+    <main class="container">
+
+        <h1>
+            <%= title %>
+        </h1>
+
+
+        <% if (error) { %>
+
+            <p class="error">
+                <%= error %>
+            </p>
+
+            <% } %>
+
+
+                <form action="/edit-organization/<%= organization.organization_id %>" method="POST">
+
+
+                    <label>
+                        Organization Name:
+                    </label>
+
+                    <input type="text" name="organization_name" value="<%= organization.organization_name %>" required>
+
+
+                    <label>
+                        Logo Path:
+                    </label>
+
+                    <input type="text" name="logo" value="<%= organization.logo %>" required>
+
+
+                    <label>
+                        Contact Email:
+                    </label>
+
+                    <input type="email" name="contact_email" value="<%= organization.contact_email %>" required>
+
+
+                    <label>
+                        Description:
+                    </label>
+
+                    <textarea name="description" required><%= organization.description %></textarea>
+
+
+                    <button type="submit">
+                        Update Organization
+                    </button>
+
+
+                </form>
+
+    </main>
+
+
+    <%- include("partials/footer") %>

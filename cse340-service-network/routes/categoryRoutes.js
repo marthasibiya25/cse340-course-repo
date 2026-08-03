@@ -1,5 +1,6 @@
 import express from "express";
 import categoryController from "../controllers/categoryController.js";
+import categoryValidation from "../validators/categoryValidation.js";
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ router.get(
 // Create category submission
 router.post(
     "/new-category",
+    categoryValidation,
     categoryController.createCategory
 );
 
@@ -42,6 +44,7 @@ router.get(
 // Edit category submission
 router.post(
     "/edit-category/:id",
+    categoryValidation,
     categoryController.updateCategory
 );
 

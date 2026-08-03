@@ -1,0 +1,58 @@
+<%- include("partials/header", { title: title }) %>
+
+    <main class="container">
+
+        <h1>
+            <%= title %>
+        </h1>
+
+
+        <% if (error) { %>
+
+            <p class="error">
+                <%= error %>
+            </p>
+
+            <% } %>
+
+
+                <form action="/new-organization" method="POST">
+
+                    <label>
+                        Organization Name:
+                    </label>
+
+                    <input type="text" name="organization_name" required>
+
+
+                    <label>
+                        Logo Path:
+                    </label>
+
+                    <input type="text" name="logo" placeholder="/images/logo.png" required>
+
+
+                    <label>
+                        Contact Email:
+                    </label>
+
+                    <input type="email" name="contact_email" required>
+
+
+                    <label>
+                        Description:
+                    </label>
+
+                    <textarea name="description" required></textarea>
+
+
+                    <button type="submit">
+                        Create Organization
+                    </button>
+
+                </form>
+
+    </main>
+
+
+    <%- include("partials/footer") %>

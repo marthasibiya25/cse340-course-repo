@@ -3,9 +3,7 @@ import dotenv from "dotenv";
 import session from "express-session";
 import flash from "connect-flash";
 
-import categoryRoutes from "./routes/categoryRoutes.js";
-import projectRoutes from "./routes/projectRoutes.js";
-import organizationRoutes from "./routes/organizationRoutes.js";
+import router from "./routes/router.js";
 
 
 dotenv.config();
@@ -51,20 +49,9 @@ app.use((req, res, next) => {
 });
 
 
-// Home
-app.get("/", (req, res) => {
 
-    res.render("index", {
-        title: "Home"
-    });
-
-});
-
-
-// Routes
-app.use("/", organizationRoutes);
-app.use("/", projectRoutes);
-app.use("/", categoryRoutes);
+// Central router
+app.use("/", router);
 
 
 // Start server

@@ -1,5 +1,6 @@
 import express from "express";
 import projectController from "../controllers/projectController.js";
+import projectValidation from "../validators/projectValidation.js";
 
 const router = express.Router();
 
@@ -15,6 +16,36 @@ router.get(
 router.get(
     "/project/:id",
     projectController.buildProjectDetail
+);
+
+
+// Create project page
+router.get(
+    "/new-project",
+    projectController.buildNewProject
+);
+
+
+// Create project submission
+router.post(
+    "/new-project",
+    projectValidation,
+    projectController.createProject
+);
+
+
+// Edit project page
+router.get(
+    "/edit-project/:id",
+    projectController.buildEditProject
+);
+
+
+// Edit project submission
+router.post(
+    "/edit-project/:id",
+    projectValidation,
+    projectController.updateProject
 );
 
 
