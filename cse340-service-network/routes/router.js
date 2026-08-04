@@ -3,7 +3,7 @@ import express from "express";
 import organizationRoutes from "./organizationRoutes.js";
 import projectRoutes from "./projectRoutes.js";
 import categoryRoutes from "./categoryRoutes.js";
-
+import accountRoutes from "./accountRoutes.js";
 
 const router = express.Router();
 
@@ -28,6 +28,9 @@ router.use("/", projectRoutes);
 
 // Category routes
 router.use("/", categoryRoutes);
+
+
+router.use("/", accountRoutes);
 
 
 export default router;

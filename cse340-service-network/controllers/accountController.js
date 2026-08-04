@@ -1,0 +1,176 @@
+import accountModel from "../models/account.js";
+import bcrypt from "bcryptjs";
+
+
+// Display users page (Admin only)
+const buildUsers = async (req, res) => {
+
+    const users = await accountModel.getAllAccounts();
+
+
+    res.render("users", {
+
+        title: "Registered Users",
+
+        users
+
+    });
+
+};
+
+
+
+// Display registration page
+const buildRegister = async (req, res) => {
+
+    res.render("register", {
+
+        title: "Register",
+
+        error: null
+
+    });
+
+};
+
+
+
+// Register new user
+const registerAccount = async (req, res) => {
+
+    const {
+        firstname,
+        lastname,
+        email,
+        password
+    } = req.body;
+
+
+    const hashedPassword = await bcrypt.hash(
+        password,
+        10
+    );
+
+
+    await accountModel.registerAccount(
+        firstname,
+        lastname,
+        email,
+        hashedPassword
+    );
+
+
+    res.redirect("/account/login");
+
+};
+
+
+
+// Display login page
+const buildLogin = async (req, res) => {
+
+    res.render("login", {
+
+        title: "Login",
+
+        error: null
+
+    });
+
+};
+
+
+
+// Login user
+const loginAccount = async (req, res) => {
+
+    const {
+        email,
+        password
+    } = req.body;
+
+
+    const account = await accountModel.getAccountByEmail(email);
+
+
+
+    if (!account) {
+
+        return res.render("login", {
+
+            title: "Login",
+
+            error: "Invalid email or password."
+
+        });
+
+    }
+
+
+
+    const passwordMatch = await bcrypt.compare(
+        password,
+        account.account_password
+    );
+
+
+
+    if (!passwordMatch) {
+
+        return res.render("login", {
+
+            title: "Login",
+
+            error: "Invalid email or password."
+
+        });
+
+    }
+
+
+
+    req.session.accountData = account;
+
+
+    res.redirect("/account/dashboard");
+
+};
+
+
+
+// Logout user
+const logoutAccount = async (req, res) => {
+
+    req.session.destroy(() => {
+
+        res.redirect("/");
+
+    });
+
+};
+
+
+// Display dashboard
+const buildDashboard = async (req, res) => {
+
+    res.render("dashboard", {
+
+        title: "Dashboard",
+
+        accountData: req.session.accountData
+
+    });
+
+};
+
+export default {
+
+    buildUsers,
+    buildRegister,
+    registerAccount,
+    buildLogin,
+    loginAccount,
+    logoutAccount,
+    buildDashboard
+
+};

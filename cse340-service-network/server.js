@@ -44,6 +44,8 @@ app.use((req, res, next) => {
 
     res.locals.messages = req.flash();
 
+    res.locals.accountData = req.session.accountData;
+
     next();
 
 });

@@ -1,0 +1,49 @@
+<%- include("partials/header", { title: title }) %>
+
+    <main class="container">
+
+        <h1>
+            <%= title %>
+        </h1>
+
+        <table class="users-table">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                <% users.forEach(user=> { %>
+
+                    <tr>
+
+                        <td>
+                            <%= user.account_firstname %>
+                                <%= user.account_lastname %>
+                        </td>
+
+                        <td>
+                            <%= user.account_email %>
+                        </td>
+
+                        <td>
+                            <%= user.account_type %>
+                        </td>
+
+                    </tr>
+
+                    <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </main>
+
+    <%- include("partials/footer") %>

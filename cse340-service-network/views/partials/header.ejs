@@ -20,10 +20,83 @@
 
             <nav>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/organizations">Organizations</a></li>
-                    <li><a href="/projects">Projects</a></li>
-                    <li><a href="/categories">Categories</a></li>
+
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="/organizations">Organizations</a>
+                    </li>
+
+                    <li>
+                        <a href="/projects">Projects</a>
+                    </li>
+
+                    <li>
+                        <a href="/categories">Categories</a>
+                    </li>
+
+
+                    <% if (accountData) { %>
+
+
+                        <% if (accountData.account_role==="Admin" ) { %>
+
+                            <li>
+                                <a href="/users">
+                                    Users
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/new-organization">
+                                    Add Organization
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/new-project">
+                                    Add Project
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/new-category">
+                                    Add Category
+                                </a>
+                            </li>
+
+                            <% } %>
+
+
+                                <li>
+                                    <a href="/account/logout">
+                                        Logout
+                                    </a>
+                                </li>
+
+
+                                <% } else { %>
+
+
+                                    <li>
+                                        <a href="/account/login">
+                                            Login
+                                        </a>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="/account/register">
+                                            Register
+                                        </a>
+                                    </li>
+
+
+                                    <% } %>
+
+
                 </ul>
             </nav>
         </div>
