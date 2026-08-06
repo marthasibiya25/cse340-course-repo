@@ -1,7 +1,9 @@
 import express from "express";
+
 import projectController from "../controllers/projectController.js";
 import projectValidation from "../validators/projectValidation.js";
 import utilities from "../utilities/index.js";
+
 
 const router = express.Router();
 
@@ -55,6 +57,24 @@ router.post(
     utilities.requireRole("Admin"),
     projectValidation,
     projectController.updateProject
+);
+
+
+// Assign categories page (Admin only)
+router.get(
+    "/assign-categories/:id",
+    utilities.requireLogin,
+    utilities.requireRole("Admin"),
+    projectController.buildAssignCategories
+);
+
+
+// Assign categories submission (Admin only)
+router.post(
+    "/assign-categories/:id",
+    utilities.requireLogin,
+    utilities.requireRole("Admin"),
+    projectController.updateProjectCategories
 );
 
 
