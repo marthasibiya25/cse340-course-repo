@@ -129,7 +129,13 @@ const loginAccount = async (req, res) => {
 
 
 
-    req.session.accountData = account;
+    req.session.accountData = {
+        account_id: account.account_id,
+        account_firstname: account.account_firstname,
+        account_lastname: account.account_lastname,
+        account_email: account.account_email,
+        account_type: account.account_type
+    };
 
 
     res.redirect("/account/dashboard");
