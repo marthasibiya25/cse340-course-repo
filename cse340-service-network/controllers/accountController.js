@@ -1,6 +1,6 @@
 import accountModel from "../models/account.js";
 import bcrypt from "bcryptjs";
-
+import volunteerModel from "../models/volunteer.js";
 
 // Display users page (Admin only)
 const buildUsers = async (req, res) => {
@@ -159,11 +159,22 @@ const logoutAccount = async (req, res) => {
 // Display dashboard
 const buildDashboard = async (req, res) => {
 
+    const accountData = req.session.accountData;
+
+
+    const volunteerProjects =
+        await volunteerModel.getVolunteerProjects(
+            accountData.account_id
+        );
+
+
     res.render("dashboard", {
 
         title: "Dashboard",
 
-        accountData: req.session.accountData
+        accountData,
+
+        volunteerProjects
 
     });
 

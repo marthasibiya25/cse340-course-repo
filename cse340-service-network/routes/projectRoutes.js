@@ -78,4 +78,19 @@ router.post(
 );
 
 
+// Volunteer for project
+router.get(
+    "/volunteer/:id",
+    utilities.requireLogin,
+    projectController.volunteerProject
+);
+
+
+// Remove volunteer from project
+router.get(
+    "/remove-volunteer/:id",
+    utilities.requireLogin,
+    projectController.removeVolunteer
+);
+
 export default router;

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS project_volunteer;
 DROP TABLE IF EXISTS project_category;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS organizations;
@@ -26,6 +27,30 @@ CREATE TABLE projects (
     location VARCHAR(150) NOT NULL,
     date DATE NOT NULL,
     organization_id INT NOT NULL REFERENCES organizations(organization_id)
+);
+
+
+CREATE TABLE project_volunteer (
+    volunteer_id SERIAL PRIMARY KEY,
+
+    account_id INT NOT NULL,
+
+    project_id INT NOT NULL,
+
+    volunteer_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_volunteer_account
+        FOREIGN KEY (account_id)
+        REFERENCES account(account_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_volunteer_project
+        FOREIGN KEY (project_id)
+        REFERENCES projects(project_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT unique_volunteer
+        UNIQUE(account_id, project_id)
 );
 
 
